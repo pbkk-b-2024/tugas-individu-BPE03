@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title', 'Ganjil Genap'); ?>
 
 <?php $__env->startSection('content'); ?>

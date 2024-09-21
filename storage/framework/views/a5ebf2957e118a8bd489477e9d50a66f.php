@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title', 'Fibonacci'); ?>
 
 <?php $__env->startSection('content'); ?>

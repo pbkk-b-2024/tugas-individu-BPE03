@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title', 'Bilangan Prima'); ?>
 
 <?php $__env->startSection('content'); ?>

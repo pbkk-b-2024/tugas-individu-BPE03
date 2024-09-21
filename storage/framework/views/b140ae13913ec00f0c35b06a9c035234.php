@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title', 'Routing Parameter'); ?>
 
 <?php $__env->startSection('content'); ?>

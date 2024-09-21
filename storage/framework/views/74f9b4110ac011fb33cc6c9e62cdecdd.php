@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title', 'Named Route'); ?>
 
 <?php $__env->startSection('content'); ?>
