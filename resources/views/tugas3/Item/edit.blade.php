@@ -92,20 +92,22 @@
                         </span>
                     @enderror
                 </div>
-
-
+                <button id="submitBtn" type="submit" class="btn btn-primary">Update item</button>
+                
             </form>
-            <button id="submitBtn" type="submit" class="btn btn-primary">Update item</button>
-            <a href="{{ route('item.index') }}" class="btn btn-warning">Kembali ke Daftar item</a>
-            <a href="{{ route('item.show', $data['item']->id) }}" class="btn btn-warning">
+            <div class="mt-3">
+                <a href="{{ route('item.index') }}" class="btn btn-warning">Kembali ke Daftar item</a>
+                <a href="{{ route('item.show', $data['item']->id) }}" class="btn btn-warning">
                 Kembali ke Detail item</a>
-            <form class="border-0" action="{{ route('item.destroy', $data['item']->id) }}" method="POST"
-                style="display:inline-block;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Hapus
-                    item</button>
-            </form>
+                <a href="{{ route('item.destroy', $data['item']->id) }}" method="POST"
+                    style="display:inline-block;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
+                        Hapus item</button>
+                </a>
+            </div>
+            
         </div>
     </div>
 @endsection

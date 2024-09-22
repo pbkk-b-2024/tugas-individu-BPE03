@@ -20,7 +20,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="count">Jumlah Buku</label>
+                        <label for="count">Jumlah Item</label>
                         <p id="judul">{{ count($data['kategori']->items) }}</p>
                     </div>
                 </div>

@@ -11,12 +11,12 @@ class KategoriController
     public function index(Request $request)
     {
         $data['kategori'] = $query = Kategori::with('items')->search($request)->paginator($request);
-        return view('tugas2.kategori.index', compact('data'));
+        return view('tugas3.kategori.index', compact('data'));
     }
 
     public function create()
     {
-        return view('tugas2.kategori.create');
+        return view('tugas3.kategori.create');
     }
 
     public function store(KategoriRequest $request)
@@ -29,13 +29,13 @@ class KategoriController
     public function show(Kategori $kategori)
     {
         $data['kategori'] = $kategori;
-        return view('tugas2.kategori.show', compact('data'));
+        return view('tugas3.kategori.show', compact('data'));
     }
 
     public function edit(Kategori $kategori)
     {
         $data['kategori'] = $kategori;
-        return view('tugas2.kategori.edit', compact('data'));
+        return view('tugas3.kategori.edit', compact('data'));
     }
 
     public function update(KategoriRequest $request, Kategori $kategori)

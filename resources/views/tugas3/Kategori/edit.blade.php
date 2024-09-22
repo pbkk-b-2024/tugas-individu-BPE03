@@ -19,18 +19,22 @@
                         </span>
                     @enderror
                 </div>
+                <button id="submitBtn" type="submit" class="btn btn-primary">Update Kategori</button>
+                
             </form>
-            <button id="submitBtn" type="submit" class="btn btn-primary">Update Kategori</button>
-            <a href="{{ route('kategori.index') }}" class="btn btn-warning">Kembali ke Daftar Kategori</a>
-            <a href="{{ route('kategori.show', $data['kategori']->id) }}" class="btn btn-warning">
-                Kembali ke Detail Kategori</a>
-            <form class="border-0" action="{{ route('kategori.destroy', $data['kategori']->id) }}" method="POST"
-                style="display:inline-block;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Hapus
-                    Kategori</button>
-            </form>
+            <div class="mt-3">
+                <a href="{{ route('kategori.index') }}" class="btn btn-warning">Kembali ke Daftar Kategori</a>
+                <a href="{{ route('kategori.show', $data['kategori']->id) }}" class="btn btn-warning">
+                    Kembali ke Detail Kategori</a>
+                <a href="{{ route('kategori.destroy', $data['kategori']->id) }}" method="POST"
+                    style="display:inline-block;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
+                        Hapus Kategori</button>
+                </a>
+            </div>
+            
         </div>
     </div>
 @endsection

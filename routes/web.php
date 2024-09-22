@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\KategoriController;
@@ -11,12 +13,20 @@ Route::get('/', function () {
     return view('layout.template');
 });
 
-Route::prefix('/tugas2')->group(function(){
-    Route::resource('/item', ItemController::class)->parameters(['crud-Item' => 'Item']);
-    Route::resource('/kategori', KategoriController::class)->parameters(['crud-kategori' => 'Kategori']);
-    Route::resource('/order', OrderController::class)->parameters(['crud-Order' => 'Order']);
-    Route::resource('/pengguna', PenggunaController::class)->parameters(['crud-Pengguna' => 'Pengguna']);
-    Route::resource('/review', ReviewController::class)->parameters(['crud-Review' => 'Review']);
+Route::get('/register', [RegisterController::class,'show'])->name('register.show');
+Route::post('/register', [RegisterController::class,'register'])->name('register.create');
+Route::get('/login', [LoginController::class, 'show'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login.create');
+Route::post('/logout', [LoginController::class, 'logout'])->name('login.logout');
+
+Route::prefix('/tugas3')->group(function(){
+    Route::middleware(['auth'])->group(function(){
+        Route::resource('/item', ItemController::class)->parameters(['Item']);
+        Route::resource('/kategori', KategoriController::class)->parameters(['Kategori']);
+        Route::resource('/order', OrderController::class)->parameters(['Order']);
+        Route::resource('/pengguna', PenggunaController::class)->parameters(['Pengguna']);
+        Route::resource('/review', ReviewController::class)->parameters(['Review']);
+    });
 });
 
 Route::fallback(function () {

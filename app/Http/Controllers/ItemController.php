@@ -8,9 +8,22 @@ use App\Models\Item;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Gate;
 
 class ItemController extends Controller
 {
+    public function beli(Item $item)
+    {
+        if (Gate::denies('buy-item')) {
+            abort(403, 'Anda tidak diizinkan untuk membeli item ini');
+        }
+
+        // Logic for buying items
+
+        $item->update(['stok' => $item->stok - 1]);
+
+        return redirect('/item');
+    }
     public function index(Request $request)
     {
         $relation = 'kategoris'; 
@@ -22,13 +35,13 @@ class ItemController extends Controller
         $data['item'] = Item::with($relation)
         ->searchWithRelations($request, $relation, ['nama'])->paginator($request);
 
-        return view('tugas2.item.index', compact('data'));
+        return view('tugas3.item.index', compact('data'));
     }
 
     public function create()
     {
         $data['kategori'] = Kategori::all();
-        return view('tugas2.item.create',compact('data'));
+        return view('tugas3.item.create',compact('data'));
     }
 
     public function store(NewItemRequest $request)
@@ -44,7 +57,7 @@ class ItemController extends Controller
     public function show(Item $item)
     {
         $data['item'] = $item;
-        return view('tugas2.item.show', compact('data'));
+        return view('tugas3.item.show', compact('data'));
     }
 
     public function edit(Item $item) 
@@ -52,7 +65,7 @@ class ItemController extends Controller
         $data['item'] = $item;
         $data['item-kategori'] = $item->kategoris->pluck('id')->toArray();
         $data['kategori'] = Kategori::all();
-        return view('tugas2.item.edit', compact('data'));
+        return view('tugas3.item.edit', compact('data'));
     }
 
     public function update(UpdateItemRequest $request, Item $item)

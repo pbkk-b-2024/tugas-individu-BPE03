@@ -38,12 +38,6 @@
 
     <!-- Featured Start -->
     
-    <div class='container-fluid pt-5'>
-        <h1>
-            @yield('title')
-        </h1>
-        @yield('content')
-    </div>
     <!-- Featured End -->
 
 

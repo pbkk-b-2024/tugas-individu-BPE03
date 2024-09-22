@@ -28,7 +28,7 @@
                 </div>
             </form>
             <div class="d-flex">
-                {{ $data['item']->appends(['search' => request()->get('search'), 'limit' => request()->get('limit')])->links() }}
+            {{ $data['item']->appends(['search' => request()->get('search'), 'limit' => request()->get('limit')])->links() }}
                 <div class="ml-2">
                     <a href="{{ route('item.create') }}" class="text-white">
                         <button class="btn btn-success">
@@ -40,7 +40,7 @@
 
         </div>
         <div class="overflow-auto">`
-            <table id="bukuTable" class="table table-bordered">
+            <table id="itemTable" class="table table-bordered">
                 <thead>
                     <tr>
                         <th>id</th>
@@ -72,6 +72,7 @@
                             </td>
                             <td>{{ Str::limit($b->deskripsi, 30, '...') }}</td>
                             <td class="d-flex">
+                                @can('manage-items')
                                 <a href="{{ route('item.edit', $b->id) }}"
                                     class="btn btn-primary btn-sm mr-2">Edit</a>
                                 <form class="border-0" action="{{ route('item.destroy', $b->id) }}" method="POST"
@@ -81,6 +82,7 @@
                                     <button type="submit" class="btn btn-danger btn-sm"
                                         onclick="return confirm('Are you sure?')">Hapus</button>
                                 </form>
+                                @endcan
                             </td>
                         </tr>
                     @empty
@@ -92,4 +94,5 @@
             </table>
         </div>
     </div>
+        
 @endsection

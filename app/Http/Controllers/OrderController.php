@@ -11,12 +11,12 @@ class OrderController
     public function index(Request $request)
     {
         $data['order'] = $query = Order::with('items')->search($request)->paginator($request);
-        return view('tugas2.Order.index', compact('data'));
+        return view('tugas3.Order.index', compact('data'));
     }
 
     public function create()
     {
-        return view('tugas2.Order.create');
+        return view('tugas3.Order.create');
     }
 
     public function store(OrderRequest $request)
@@ -29,7 +29,7 @@ class OrderController
     public function show(Order $order)
     {
         $data['order'] = $order;
-        return view('tugas2.Order.show', compact('data'));
+        return view('tugas3.Order.show', compact('data'));
     }
 
     public function destroy(Order $order)
