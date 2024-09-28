@@ -12,12 +12,12 @@ class PenggunaController
     public function index(Request $request)
     {
         $data['pengguna'] = $query = Pengguna::with('items')->search($request)->paginator($request);
-        return view('tugas3.Pengguna.index', compact('data'));
+        return view('tugas4.Pengguna.index', compact('data'));
     }
 
     public function create()
     {
-        return view('tugas3.Pengguna.create');
+        return view('tugas4.Pengguna.create');
     }
 
     public function store(NewPenggunaRequest $request)
@@ -30,13 +30,13 @@ class PenggunaController
     public function show(Pengguna $pengguna)
     {
         $data['pengguna'] = $pengguna;
-        return view('tugas3.Pengguna.show', compact('data'));
+        return view('tugas4.Pengguna.show', compact('data'));
     }
 
     public function edit(Pengguna $pengguna)
     {
         $data['pengguna'] = $pengguna;
-        return view('tugas3.Pengguna.edit', compact('data'));
+        return view('tugas4.Pengguna.edit', compact('data'));
     }
 
     public function update(UpdatePenggunaRequest $request, Pengguna $pengguna)

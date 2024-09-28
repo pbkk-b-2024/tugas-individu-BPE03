@@ -19,7 +19,7 @@ Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.create');
 Route::post('/logout', [LoginController::class, 'logout'])->name('login.logout');
 
-Route::prefix('/tugas3')->group(function(){
+Route::prefix('/tugas4')->group(function(){
     Route::middleware(['auth'])->group(function(){
         Route::resource('/item', ItemController::class)->parameters(['Item']);
         Route::resource('/kategori', KategoriController::class)->parameters(['Kategori']);

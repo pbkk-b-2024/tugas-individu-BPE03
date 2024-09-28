@@ -35,13 +35,13 @@ class ItemController extends Controller
         $data['item'] = Item::with($relation)
         ->searchWithRelations($request, $relation, ['nama'])->paginator($request);
 
-        return view('tugas3.item.index', compact('data'));
+        return view('tugas4.item.index', compact('data'));
     }
 
     public function create()
     {
         $data['kategori'] = Kategori::all();
-        return view('tugas3.item.create',compact('data'));
+        return view('tugas4.item.create',compact('data'));
     }
 
     public function store(NewItemRequest $request)
@@ -57,7 +57,7 @@ class ItemController extends Controller
     public function show(Item $item)
     {
         $data['item'] = $item;
-        return view('tugas3.item.show', compact('data'));
+        return view('tugas4.item.show', compact('data'));
     }
 
     public function edit(Item $item) 
@@ -65,7 +65,7 @@ class ItemController extends Controller
         $data['item'] = $item;
         $data['item-kategori'] = $item->kategoris->pluck('id')->toArray();
         $data['kategori'] = Kategori::all();
-        return view('tugas3.item.edit', compact('data'));
+        return view('tugas4.item.edit', compact('data'));
     }
 
     public function update(UpdateItemRequest $request, Item $item)
