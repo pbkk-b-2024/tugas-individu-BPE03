@@ -29,7 +29,7 @@ class ItemController extends Controller
         $relation = 'kategoris'; 
 
         // LAZY LOADING
-        // $data['buku'] = Buku::SearchWithRelations($request, $relation, ['nama'])->paginator($request);
+        // $data['item'] = Item::SearchWithRelations($request, $relation, ['nama'])->paginator($request);
 
         // EAGER LOADING
         $data['item'] = Item::with($relation)

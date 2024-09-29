@@ -29,6 +29,8 @@ Route::prefix('/tugas4')->group(function(){
     });
 });
 
+Route::view('/api/schema','api.schema')->name('api.schema');
+
 Route::fallback(function () {
     return redirect('/');
 });

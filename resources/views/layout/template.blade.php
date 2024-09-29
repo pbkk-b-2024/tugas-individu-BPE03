@@ -23,6 +23,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="/css/style.css" rel="stylesheet">
+    @stack('styles')
 </head>
 
 <body>
@@ -37,7 +38,7 @@
 
 
     <!-- Featured Start -->
-    
+    @yield('content2')
     <!-- Featured End -->
 
 
@@ -92,6 +93,7 @@
 
     <!-- Template Javascript -->
     <script src="/js/main.js"></script>
+    @stack('scripts')
 </body>
 
 </html>

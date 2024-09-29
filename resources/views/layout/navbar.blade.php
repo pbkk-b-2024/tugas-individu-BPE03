@@ -21,6 +21,7 @@
                         <a href="{{ route('kategori.index') }}" class="nav-item nav-link {{ request()->routeIs('kategori.index') ? 'active' : '' }}">Kategori</a>
                         <a href="{{ route('order.index') }}" class="nav-item nav-link {{ request()->routeIs('order.create') ? 'active' : '' }}">Order</a>
                         <a href="{{ route('review.index') }}" class="nav-item nav-link {{ request()->routeIs('review.create') ? 'active' : '' }}">Review</a>
+                        <a href="{{ route('api.schema') }}" class="nav-item nav-link {{ request()->is('api/schema') ? 'active' : '' }}">API Documentation</a>
                     </div>
                 </nav>
             </div>

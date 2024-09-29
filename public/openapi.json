@@ -1,0 +1,574 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Api Documentation",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000"
+        }
+    ],
+    "paths": {
+        "/api/register": {
+            "post": {
+                "tags": ["Auth"],
+                "summary": "Register a new user",
+                "security": [],
+                "description": "Endpoint to register a new user by providing necessary user details.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "The name of the user."
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "description": "The email address of the user.",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "description": "The password for the user account.",
+                                        "format": "password"
+                                    }
+                                },
+                                "required": ["name", "email", "password"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User created"
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "summary": "User Login",
+                "security": [],
+                "tags": ["Auth"],
+                "description": "Allows a user to log in by providing their email and password.",
+                "operationId": "loginUser",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "admin@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "12345678"
+                                    }
+                                },
+                                "required": ["email", "password"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful login",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "accessToken": {
+                                            "type": "string",
+                                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                                        },
+                                        "refreshToken": {
+                                            "type": "string",
+                                            "example": "d4f5e6g7h8i9j0k1l2m3n4o5p6q7r8s9..."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, invalid credentials"
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "summary": "User Logout",
+                "tags": ["Auth"],
+                "operationId": "logoutUser",
+                "responses": {
+                    "200": {
+                        "description": "Successful logout"
+                    }
+                }
+            }
+        },
+        "/api/tugas4/items": {
+            "get": {
+                "summary": "Get items",
+                "tags": ["Items"],
+                "description": "Get a list of all items.",
+                "operationId": "getItems",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "search",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of items",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create item",
+                "tags": ["Items"],
+                "operationId": "createItem",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nama": {
+                                        "type": "string",
+                                        "maxLength": 255,
+                                        "description": "Name of the item"
+                                    },
+                                    "harga": {
+                                        "type": "integer",
+                                        "description": "Price of the item"
+                                    },
+                                    "stok": {
+                                        "type": "integer",
+                                        "description": "Number of items available"
+                                    },
+                                    "kategori": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "description": "Category ID"
+                                        },
+                                        "description": "Categories the item belongs to"
+                                    },
+                                    "deskripsi": {
+                                        "type": "string",
+                                        "description": "Description of the item",
+                                        "nullable": true
+                                    }
+                                },
+                                "required": [
+                                    "nama",
+                                    "harga",
+                                    "stok",
+                                    "kategori",
+                                    "deskripsi"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Item created"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update item",
+                "tags": ["Items"],
+                "operationId": "updateItem",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nama": {
+                                        "type": "string",
+                                        "maxLength": 255,
+                                        "description": "Name of the item"
+                                    },
+                                    "harga": {
+                                        "type": "integer",
+                                        "description": "Price of the item"
+                                    },
+                                    "stok": {
+                                        "type": "integer",
+                                        "description": "Number of items available"
+                                    },
+                                    "kategori": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "description": "Category ID"
+                                        },
+                                        "description": "Categories the item belongs to"
+                                    },
+                                    "deskripsi": {
+                                        "type": "string",
+                                        "description": "Description of the item",
+                                        "nullable": true
+                                    }
+                                },
+                                "required": [
+                                    "nama",
+                                    "harga",
+                                    "stok",
+                                    "kategori",
+                                    "deskripsi"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Item updated"
+                    }
+                }
+            }
+        },
+        "/api/tugas4/items/{id}": {
+            "get": {
+                "summary": "Get item",
+                "tags": ["Items"],
+                "operationId": "getItem",
+                "parameters": [
+                    {
+                        "name": "item",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Item found"
+                    },
+                    "404": {
+                        "description": "Item not found"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update item",
+                "tags": ["Items"],
+                "operationId": "updateItem",
+                "parameters": [
+                    {
+                        "name": "item",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "item",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Item"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Item updated"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete item",
+                "tags": ["Items"],
+                "operationId": "deleteItem",
+                "parameters": [
+                    {
+                        "name": "item",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Item deleted"
+                    }
+                }
+            }
+        },
+        "/api/tugas4/items/{id}/kategori": {
+            "get": {
+                "summary": "Get item kategori",
+                "tags": ["Items"],
+                "operationId": "getItemKategori",
+                "parameters": [
+                    {
+                        "name": "item",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Item found"
+                    },
+                    "404": {
+                        "description": "Item not found"
+                    }
+                }
+            }
+        },
+        "/api/tugas4/kategoris": {
+            "get": {
+                "summary": "Get kategoris",
+                "tags": ["Kategoris"],
+                "operationId": "getKategoris",
+                "responses": {
+                    "200": {
+                        "description": "Kategoris found"
+                    },
+                    "404": {
+                        "description": "Kategoris not found"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create kategori",
+                "tags": ["Kategoris"],
+                "operationId": "createKategori",
+                "parameters": [
+                    {
+                        "name": "kategoris",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Kategori"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Kategori created"
+                    }
+                }
+            }
+        },
+        "/api/tugas4/kategoris/{id}": {
+            "get": {
+                "summary": "Get kategori",
+                "tags": ["Kategoris"],
+                "operationId": "getKategori",
+                "parameters": [
+                    {
+                        "name": "kategoris",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Kategori found"
+                    },
+                    "404": {
+                        "description": "Kategori not found"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update kategori",
+                "tags": ["Kategoris"],
+                "operationId": "updateKategori",
+                "parameters": [
+                    {
+                        "name": "kategoris",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "kategoris",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Kategori"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Kategori updated"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete kategori",
+                "tags": ["Kategoris"],
+                "operationId": "deleteKategori",
+                "parameters": [
+                    {
+                        "name": "kategoris",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Kategori deleted"
+                    }
+                }
+            }
+        },
+        "/api/tugas4/kategoris/{id}/items": {
+            "get": {
+                "summary": "Get items by kategori",
+                "tags": ["Kategoris"],
+                "operationId": "getItemsByKategori",
+                "parameters": [
+                    {
+                        "name": "kategoris",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Items found"
+                    },
+                    "404": {
+                        "description": "Items not found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password"
+                    }
+                },
+                "required": ["name", "email", "password"]
+            },
+            "Item": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "nama": {
+                        "type": "string"
+                    },
+                    "harga": {
+                        "type": "integer"
+                    },
+                    "stok": {
+                        "type": "integer"
+                    },
+                    "kategori": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Kategori"
+                        }
+                    },
+                    "deskripsi": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Kategori": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "nama": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        {
+            "BearerAuth": []
+        }
+    ]
+}
