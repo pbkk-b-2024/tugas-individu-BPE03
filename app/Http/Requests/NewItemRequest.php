@@ -28,6 +28,7 @@ class NewItemRequest extends FormRequest
             'kategori' => 'required|array',
             'kategori.*' => 'exists:kategori,id',
             'deskripsi' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 }

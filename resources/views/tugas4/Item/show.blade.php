@@ -5,6 +5,13 @@
 @section('content')
     <div class="card">
         <div class="card-body">
+        <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <img src="{{ asset('storage/' . $data['item']->image) }}" id="image" width="200" height="200">
+                    </div>
+                </div>
+        </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">

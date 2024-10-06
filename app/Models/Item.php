@@ -20,7 +20,8 @@ class Item extends Model
         'kategori',         
         'harga',
         'stok',        
-        'deskripsi',    
+        'deskripsi',
+        'image',    
     ];
 
     public function kategoris()

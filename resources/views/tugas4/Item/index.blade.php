@@ -48,6 +48,7 @@
                         <th>Harga</th>
                         <th>Stok</th>
                         <th>Kategori</th>
+                        <th>Gambar</th>
                         <th>Deskripsi</th>
                     </tr>
                 </thead>
@@ -70,6 +71,13 @@
                                     <!-- Adjust field name as needed -->
                                 @endforeach
                             </td>
+                            @if ($b->image)
+                            <td>
+                                <img src="{{ asset('storage/' . $b->image) }}"  alt="{{ $b->nama }}" width="100px" height="100px">
+                            </td>
+                            @else
+                                <td>No image</td>
+                            @endif
                             <td>{{ Str::limit($b->deskripsi, 30, '...') }}</td>
                             <td class="d-flex">
                                 @can('manage-items')

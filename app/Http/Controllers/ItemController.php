@@ -9,6 +9,7 @@ use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
@@ -46,11 +47,15 @@ class ItemController extends Controller
 
     public function store(NewItemRequest $request)
     {
+        //dd($request->all());
         $validatedData = $request->validated();
         unset($validatedData['kategori']);
+        if($request->hasFile('image')) {
+            $validatedData['image'] = $request->file('image')->store('images/item', 'public');
+        }
         $item = Item::create($validatedData);
         $item->kategoris()->attach($request->input('kategori'));
-
+        
         return redirect()->route('item.index')->with('success', 'Item "' . $item->nama . '" sukses ditambahkan.');
     }
 
