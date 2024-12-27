@@ -5,7 +5,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <form id="updateForm" action="{{ route('item.update', $data['item']->id) }}" method="POST">
+            <form id="updateForm" action="{{ route('item.update', $data['item']->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT') <!-- Menandakan bahwa ini adalah request untuk update -->
 
@@ -92,6 +92,33 @@
                         </span>
                     @enderror
                 </div>
+
+                <div class="form-group">
+                    <label for="image">Foto</label>
+                    <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" accept="image/*">
+                    @error('image')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                @if (Auth::check() && Auth::user()->hasRole('penjual'))
+                <input type="hidden" id="users_id" name="users_id" value="{{ Auth::id() }}">
+                <p>You are the seller</p>
+                @else
+                <div class="form-group">
+                    <label for="users_id">Penjual</label><br>
+                    <select class="form-control selectpicker w-100" id="users_id" name="users_id"
+                        class="form-control @error('users_id') is-invalid @enderror" multiple>
+                            @foreach ($data['penjual'] as $penjual)
+                                <option value="{{ old('users_id', $data['item']->users_id) }}">
+                                    {{ $penjual->name }}
+                                </option>
+                            @endforeach
+                    </select>
+                </div>
+                @endif
                 <button id="submitBtn" type="submit" class="btn btn-primary">Update item</button>
                 
             </form>

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdatePenggunaRequest extends FormRequest
+class UpdateOrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,15 +23,14 @@ class UpdatePenggunaRequest extends FormRequest
     public function rules()
     {
         // Get the current Item instance from the route
-        $penggunaId = $this->route('pengguna')->id;
+        $itemId = $this->route('order')->id;
 
         return [
-            'nama' => 'required|string|max:255',
-            'harga' => 'required|integer',
-            'stok' => 'required|integer',
-            'kategori' => 'required|array',
-            'kategori.*' => 'exists:kategori,id',
-            'deskripsi' => 'nullable|string',
+            'users_id' => 'required|exists:users,id',
+            'item_id' => 'required|exists:item,id',
+            'quantity' => 'required|integer',
+            'total' => 'required|integer',
+            'status' => 'required|string',
         ];
     }
 }

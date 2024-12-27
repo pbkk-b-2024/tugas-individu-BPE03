@@ -39,6 +39,9 @@
             </div>
             <div class="col-lg-3 col-6 text-right">
                 <a href="#" class="btn border">{{ Auth::user()->name ?? 'Guest' }}</a>
+                @auth
+                <p>Role: {{ Auth::user()->getRoleNames() ?? 'Guest' }}</p>
+                @endauth
                 <a href="" class="btn border">
                     <i class="fas fa-heart text-primary"></i>
                     <span class="badge">0</span>

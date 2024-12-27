@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class NewPenggunaRequest extends FormRequest
+class NewOrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +22,11 @@ class NewPenggunaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama' => 'required|string|max:255',
-            'username' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'umur' => 'required|integer',
-            'jenis_kelamin' => 'nullable|string|max:255',
-            'alamat' => 'required|string|max:255',
-            'no_telp' => 'required|integer',
+            'users_id' => 'required|exists:users,id',
+            'item_id' => 'required|exists:item,id',
+            'quantity' => 'required|integer',
+            'total' => 'required|integer',
+            'status' => 'required|string',
         ];
     }
 }

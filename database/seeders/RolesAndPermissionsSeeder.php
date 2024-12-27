@@ -25,6 +25,22 @@ class RolesAndPermissionsSeeder extends Seeder
             'edit kategori',
             'delete kategori',
             'view kategori',
+            // keranjang
+            'manage keranjang',
+            'view keranjang',
+            // wishlist
+            'manage wishlist',
+            'view wishlist',
+            // order
+            'manage order',
+            'view order',
+            // user
+            'manage user',
+            'view user',
+            'edit user',
+            // review
+            'manage review',
+            'view review',
         ];
 
         foreach ($permissions as $permission) {
@@ -33,15 +49,15 @@ class RolesAndPermissionsSeeder extends Seeder
 
 
         $admin = Role::create(['name' => 'admin',]);
-        $petugas = Role::create(['name' => 'petugas',]);
-        $pengunjung = Role::create(['name' => 'pengunjung',]);
+        $pembeli = Role::create(['name' => 'pembeli',]);
+        $penjual = Role::create(['name' => 'penjual',]);
         
         $admin->givePermissionTo($permissions);
-        $petugas->givePermissionTo([
+        $pembeli->givePermissionTo([
             'view item',
             'view kategori',
         ]);
-        $pengunjung->givePermissionTo([
+        $penjual->givePermissionTo([
             'view item',
             'view kategori',
         ]);

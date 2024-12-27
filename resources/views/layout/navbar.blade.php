@@ -6,7 +6,7 @@
                     <i class="fa fa-angle-down text-dark"></i>
                 </a>
                 <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
-                    <div class="navbar-nav w-100 overflow-hidden {{ request()->is('tugas4/*') ? 'menu-open' : '' }}" style="height: 410px">
+                    <div class="navbar-nav w-100 overflow-hidden {{ request()->is('fp/*') ? 'menu-open' : '' }}" style="height: 410px">
                      <!--   <div class="nav-item dropdown">
                             <a href="#" class="nav-link" data-toggle="dropdown">Dresses <i class="fa fa-angle-down float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
@@ -17,11 +17,15 @@
                         </div>
                     -->
                         <a href="{{ route('item.index') }}" class="nav-item nav-link {{ request()->routeIs('item.index') ? 'active' : '' }}">Item</a>
-                        <a href="{{ route('pengguna.index') }}" class="nav-item nav-link {{ request()->routeIs('pengguna.index') ? 'active' : '' }}">Pengguna</a>
                         <a href="{{ route('kategori.index') }}" class="nav-item nav-link {{ request()->routeIs('kategori.index') ? 'active' : '' }}">Kategori</a>
+                        @auth
                         <a href="{{ route('order.index') }}" class="nav-item nav-link {{ request()->routeIs('order.create') ? 'active' : '' }}">Order</a>
+                        @role('admin')
+                        <a href="{{ route('user.index') }}" class="nav-item nav-link {{ request()->routeIs('user.index') ? 'active' : '' }}">Users</a>
                         <a href="{{ route('review.index') }}" class="nav-item nav-link {{ request()->routeIs('review.create') ? 'active' : '' }}">Review</a>
                         <a href="{{ route('api.schema') }}" class="nav-item nav-link {{ request()->is('api/schema') ? 'active' : '' }}">API Documentation</a>
+                        @endrole
+                        @endauth
                     </div>
                 </nav>
             </div>

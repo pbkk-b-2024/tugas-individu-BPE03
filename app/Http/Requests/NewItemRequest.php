@@ -29,6 +29,7 @@ class NewItemRequest extends FormRequest
             'kategori.*' => 'exists:kategori,id',
             'deskripsi' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'users_id' => 'required|integer',
         ];
     }
 }

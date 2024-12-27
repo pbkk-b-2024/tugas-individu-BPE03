@@ -21,7 +21,8 @@ class Item extends Model
         'harga',
         'stok',        
         'deskripsi',
-        'image',    
+        'image',
+        'users_id',    
     ];
 
     public function kategoris()
@@ -31,12 +32,27 @@ class Item extends Model
 
     public function orders()
     {
-        return $this->belongsToMany(Order::class, 'order_item','item_id', 'order_id'); // Explicitly define the pivot table name
+        return $this->hasMany(Order::class);
     }
 
     public function reviews()
     {
-        return $this->hasMany(Review::class); // Explicitly define the pivot table name
+        return $this->hasMany(Review::class);
+    }
+
+    public function keranjangs()
+    {
+        return $this->belongsToMany(Keranjang::class, 'keranjang_item', 'item_id', 'keranjang_id');
+    }
+
+    public function wishlists()
+    {
+        return $this->belongsToMany(Wishlist::class, 'wishlist_item', 'item_id', 'wishlist_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'users_id', 'id');
     }
 
 }

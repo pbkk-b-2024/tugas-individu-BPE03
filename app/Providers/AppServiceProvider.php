@@ -11,9 +11,6 @@ use app\Policies\ItemPolicy;
 
 class AppServiceProvider extends ServiceProvider
 {
-    protected $policies = [
-        Item::class => ItemPolicy::class,
-    ];
     /**
      * Register any application services.
      */
@@ -29,15 +26,5 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
         $this->register();
-
-        // Gate untuk mengelola Item (Hanya supplier yang boleh mengelola item)
-         Gate::define('manage-item', function (User $user) {
-             return $user->role === 'supplier';
-         });
-
-        // Gate untuk membeli barang (Hanya pelanggan yang boleh membeli item)
-        Gate::define('buy-item', function (User $user) {
-            return $user->role === 'pelanggan';
-        });
     }
 }

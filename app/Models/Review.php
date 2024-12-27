@@ -14,15 +14,15 @@ class Review extends Model
     //protected $primaryKey = 'review_id';
 
     protected $fillable = [
-        'nama',
-        'item',
+        'users_id',
+        'item_id',
         'rating',
         'review',
     ];
 
-    public function penggunas()
+    public function users()
     {
-        return $this->belongsTo(Pengguna::class);
+        return $this->belongsTo(User::class);
     }
 
     public function items()

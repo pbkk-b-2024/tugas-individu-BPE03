@@ -28,6 +28,7 @@
             </form>
             <div class="d-flex">
                 {{ $data['kategori']->appends(['search' => request()->get('search'), 'limit' => request()->get('limit')])->links() }}
+                @role('admin')
                 <div class="ml-2">
                     <a href="{{ route('kategori.create') }}" class="text-white">
                         <button class="btn btn-success">
@@ -35,6 +36,7 @@
                         </button>
                     </a>
                 </div>
+                @endrole
             </div>
 
         </div>
@@ -45,7 +47,9 @@
                         <th>id</th>
                         <th>Nama Kategori</th>
                         <th>Jumlah Item</th>
+                        @role('admin')
                         <th>Action</th>
+                        @endrole
                     </tr>
                 </thead>
                 <tbody>
@@ -59,7 +63,12 @@
                                     {{ Str::limit($kategori->nama, 20, '...') }}
                                 </a>
                             </td>
+                            @if(auth()->user()->hasRole('penjual'))
+                            <td>{{ $kategori->items_count }}</td>
+                            @else
                             <td>{{ count($kategori->items) }}</td>
+                            @endif
+                            @role('admin')
                             <td class="d-flex">
                                 <a href="{{ route('kategori.edit', $kategori->id) }}"
                                     class="btn btn-primary btn-sm mr-2">Edit</a>
@@ -71,6 +80,7 @@
                                         onclick="return confirm('Are you sure?')">Hapus</button>
                                 </form>
                             </td>
+                            @endrole
                         </tr>
                     @empty
                         <tr>

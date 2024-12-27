@@ -18,12 +18,30 @@ class RegisterController
         }
     }
 
+    public function show_penjual(Request $request){
+        if (Auth::check()) {
+            return redirect()->back();
+        }else{
+            return view('auth.register_penjual');
+        }
+    }
+
     public function register(Request $request)
     {
         //dd($this->validator($request->all())->validate());
         $validated = $this->validator($request->all())->validate();
        // dd($validated);
         $user = $this->create($validated);
+        Auth::attempt($request->only('email', 'password'));
+        return redirect()->intended('/');
+    }
+
+    public function register_penjual(Request $request)
+    {
+        //dd($this->validator($request->all())->validate());
+        $validated = $this->validator($request->all())->validate();
+       // dd($validated);
+        $user = $this->create_penjual($validated);
         Auth::attempt($request->only('email', 'password'));
         return redirect()->intended('/');
     }
@@ -35,8 +53,24 @@ class RegisterController
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        $user->assignRole('pengunjung');
+        $user->assignRole('pembeli');
+        if($user->hasRole('pembeli')){
+            return $user;
+        }
         return $user;
+    }
+
+    protected function create_penjual(array $data)
+    {
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
+        $user->assignRole('penjual');
+        if($user->hasRole('penjual')){
+            return $user;
+        }
     }
 
     protected function validator(array $data)

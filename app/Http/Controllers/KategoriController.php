@@ -10,13 +10,22 @@ class KategoriController
 {
     public function index(Request $request)
     {
-        $data['kategori'] = $query = Kategori::with('items')->search($request)->paginator($request);
-        return view('tugas4.kategori.index', compact('data'));
+        $user = auth()->user();
+        if($user->hasRole('penjual')) {
+            $data['kategori'] = Kategori::whereHas('items', function($query) use ($user) {
+                $query->where('users_id', $user->id);
+            })->withCount(['items' => function ($query) use ($user) {
+                $query->where('users_id', $user->id); // Count only items sold by the seller
+            }])->search($request)->paginator($request);
+        } else {
+            $data['kategori'] = $query = Kategori::with('items')->search($request)->paginator($request);
+        }
+        return view('fp.kategori.index', compact('data'));
     }
 
     public function create()
     {
-        return view('tugas4.kategori.create');
+        return view('fp.kategori.create');
     }
 
     public function store(KategoriRequest $request)
@@ -29,13 +38,13 @@ class KategoriController
     public function show(Kategori $kategori)
     {
         $data['kategori'] = $kategori;
-        return view('tugas4.kategori.show', compact('data'));
+        return view('fp.kategori.show', compact('data'));
     }
 
     public function edit(Kategori $kategori)
     {
         $data['kategori'] = $kategori;
-        return view('tugas4.kategori.edit', compact('data'));
+        return view('fp.kategori.edit', compact('data'));
     }
 
     public function update(KategoriRequest $request, Kategori $kategori)

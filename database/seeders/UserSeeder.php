@@ -16,9 +16,9 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $adminRole = Role::where('name', 'admin')->first();
-        $petugasRole = Role::where('name', 'petugas')->first();
-        $pengunjungRole = Role::where('name', 'pengunjung')->first();
-
+        $pembeliRole = Role::where('name', 'pembeli')->first();
+        $penjualRole = Role::where('name', 'penjual')->first();
+        
         User::create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
@@ -26,15 +26,15 @@ class UserSeeder extends Seeder
         ])->assignRole($adminRole);
 
         User::create([
-            'name' => 'Petugas',
-            'email' => 'petugas@example.com',
+            'name' => 'Pembeli',
+            'email' => 'pembeli@example.com',
             'password' => Hash::make('12345678'),
-        ])->assignRole($petugasRole);
+        ])->assignRole($pembeliRole);
 
         User::create([
-            'name' => 'Pengunjung',
-            'email' => 'pengunjung@example.com',
+            'name' => 'Penjual',
+            'email' => 'penjual@example.com',
             'password' => Hash::make('12345678'),
-        ])->assignRole($pengunjungRole);
+        ])->assignRole($penjualRole);
     }
 }

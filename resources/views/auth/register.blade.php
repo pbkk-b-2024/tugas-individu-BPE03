@@ -30,7 +30,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header text-center">
-                        <h4>Create Your Account</h4>
+                        <h4>Create a new account</h4>
                     </div>
                     <div class="card-body">
                         <form onsubmit="return validatePassword()" action="{{ route('register.create') }}" method="post">
@@ -56,6 +56,8 @@
                     </div>
                     <div class="card-footer text-center">
                         <p>Already have an account? <a href="{{ route('login') }}">Login</a></p>
+                        <p>Want to register as seller? <a href="{{ route('register.show_penjual') }}">Register as seller</a></p>
+                        <button type="button" class="btn btn-secondary btn-block" onclick="window.location.href='{{ url('/') }}'">Return to Dashboard</button>
                     </div>
                 </div>
             </div>

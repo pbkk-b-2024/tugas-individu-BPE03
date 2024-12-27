@@ -27,7 +27,7 @@ class RegisterController
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        $user->assignRole('pengunjung');
+        $user->assignRole('pembeli');
         return $user;
     }
 

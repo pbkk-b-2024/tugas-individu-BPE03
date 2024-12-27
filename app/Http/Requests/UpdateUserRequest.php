@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateItemRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,7 @@ class UpdateItemRequest extends FormRequest
     public function rules()
     {
         // Get the current Item instance from the route
-        $itemId = $this->route('item')->id;
+        $userId = $this->route('user')->id;
 
         return [
             'nama' => 'required|string|max:255',
@@ -32,8 +32,6 @@ class UpdateItemRequest extends FormRequest
             'kategori' => 'required|array',
             'kategori.*' => 'exists:kategori,id',
             'deskripsi' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'users_id' => 'required|integer',
         ];
     }
 }

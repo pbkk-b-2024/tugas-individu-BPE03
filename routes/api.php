@@ -12,7 +12,7 @@ Route::middleware('throttle:60,1')->group(function () {
     Route::post('/login', LoginController::class);
     Route::post('/logout', LogoutController::class)->middleware('auth:sanctum');
 
-    Route::prefix('/tugas4')->group(function(){
+    Route::prefix('/fp')->group(function(){
         Route::middleware(['auth:sanctum'])->group(function(){
             Route::prefix('items')->group(function(){
                 Route::get('/', [ItemController::class, 'index']);

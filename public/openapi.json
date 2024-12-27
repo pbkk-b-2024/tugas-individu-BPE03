@@ -117,7 +117,7 @@
                 }
             }
         },
-        "/api/tugas4/items": {
+        "/api/fp/items": {
             "get": {
                 "summary": "Get items",
                 "tags": ["Items"],
@@ -266,7 +266,7 @@
                 }
             }
         },
-        "/api/tugas4/items/{id}": {
+        "/api/fp/items/{id}": {
             "get": {
                 "summary": "Get item",
                 "tags": ["Items"],
@@ -339,7 +339,7 @@
                 }
             }
         },
-        "/api/tugas4/items/{id}/kategori": {
+        "/api/fp/items/{id}/kategori": {
             "get": {
                 "summary": "Get item kategori",
                 "tags": ["Items"],
@@ -364,7 +364,7 @@
                 }
             }
         },
-        "/api/tugas4/kategoris": {
+        "/api/fp/kategoris": {
             "get": {
                 "summary": "Get kategoris",
                 "tags": ["Kategoris"],
@@ -399,7 +399,7 @@
                 }
             }
         },
-        "/api/tugas4/kategoris/{id}": {
+        "/api/fp/kategoris/{id}": {
             "get": {
                 "summary": "Get kategori",
                 "tags": ["Kategoris"],
@@ -472,7 +472,7 @@
                 }
             }
         },
-        "/api/tugas4/kategoris/{id}/items": {
+        "/api/fp/kategoris/{id}/items": {
             "get": {
                 "summary": "Get items by kategori",
                 "tags": ["Kategoris"],

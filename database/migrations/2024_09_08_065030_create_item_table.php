@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('stok');
             $table->string('deskripsi')->nullable();
             $table->string('image')->nullable();
+            $table->foreignId('users_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -45,7 +45,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="kategori">Kategori</label><br>
-                            <select class="selectpicker w-100" id="kategori" name="kategori[]"
+                            <select class="form-control selectpicker w-100" id="kategori" name="kategori[]"
                                 class="form-control @error('kategori') is-invalid @enderror" multiple>
                                 @foreach ($data['kategori'] as $k)
                                     <option value="{{ $k->id }}"
@@ -83,6 +83,23 @@
                         </span>
                     @enderror
                 </div>
+
+                @if (Auth::check() && Auth::user()->hasRole('penjual'))
+                <input type="hidden" id="users_id" name="users_id" value="{{ Auth::id() }}">
+                <p>You are the seller</p>
+                @else
+                <div class="form-group">
+                    <label for="users_id">Penjual</label><br>
+                    <select class="form-control selectpicker w-100" id="users_id" name="users_id"
+                        class="form-control @error('users_id') is-invalid @enderror" multiple>
+                            @foreach ($data['penjual'] as $penjual)
+                                <option value="{{ $penjual->id }}">
+                                    {{ $penjual->name }}
+                                </option>
+                            @endforeach
+                    </select>
+                </div>
+                @endif
 
                 <button type="submit" class="btn btn-primary">Tambah Item</button>
                 <a href="{{ route('item.index') }}" class="btn btn-warning">Kembali</a><a href="#"></a>

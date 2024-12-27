@@ -5,7 +5,7 @@ info:
 servers:
   - url: http://127.0.0.1:8000
 paths:
-  /api/tugas4/items:
+  /api/fp/items:
     get:
       summary: Get items
       responses:
@@ -13,7 +13,7 @@ paths:
           description: A list of items
           content:
             application/json:
-  /api/tugas4/items/{item}:
+  /api/fp/items/{item}:
     get:
       summary: Get item by id
       responses:
